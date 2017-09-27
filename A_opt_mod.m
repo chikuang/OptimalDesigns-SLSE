@@ -53,9 +53,6 @@ function [del , ANS, error] = A_opt_mod(N,t,theta,range,fun)
   
   %% checking condition, from M-A 
   % prepare the variables
-%    A = G2 - t* g1 * g1';
-%    inv_A =  inv(A) ; 
-%    inv_A_2 = inv_A*inv_A;
   BI = inv(B);
   phi_A = zeros(N,1);
   C = blkdiag( 0,eye(n));
