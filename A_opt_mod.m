@@ -12,7 +12,7 @@
 % Michaelis-Menten model
 % theta = [ a=1 , b=1] 
 % range is from 0 to 4
-% [d ,a,e] = A_opt(101,0,[1 1]',[0;4],@mm)
+% [d ,a,e] = A_opt_mod(101,0,[1 1]',[0;4],@mm)
 
 % Compartment model with 8 compartments
 % [d ,a,e] = A_opt(101,0.1,[1,0.1,1,0.6,1,2.3,1,5.5]',[0;10],@comp_4)
@@ -58,14 +58,11 @@ function [del , ANS, error] = A_opt_mod(N,t,theta,range,fun)
   C = blkdiag( 0,eye(n));
   for i = 1:N
     f = fun(u(i),theta);
-%     fg1 = f - g1;
-%     phi_A(i) = (1-t)*f' * inv_A_2*f+ t* fg1' *inv_A_2 *fg1 ;
      I = [1 sqrt(t)*f' ; sqrt(t)*f  f*f'];
      phi_A(i) = trace(I*BI*C' *C*BI) ;
   end
 
   % update the error
-  %trac = trace(inv_A);
   trac = trace(C*BI*C');
   error = max(phi_A - trac );
   %% plots
@@ -84,9 +81,7 @@ function [del , ANS, error] = A_opt_mod(N,t,theta,range,fun)
   
   %directional derivative plot
   fx = @(x) fun(x,theta);
-  %ff = @(x) (1-t)*fx(x)'*inv_A_2*fx(x)+ t* (fx(x)-g1)'*inv_A_2 *(fx(x)-g1)-trac;
-  ff = @(x) trace([1 sqrt(t)*fx(x)' ; sqrt(t)*fx(x)  fx(x)*fx(x)'] *BI*C'*C*...
-    BI)-trac;
+  ff = @(x) trace([1 sqrt(t)*fx(x)' ; sqrt(t)*fx(x)  fx(x)*fx(x)'] *BI*C'*C*BI) - trac;
   
   figure
     plot(u,phi_A-trac*ones(N,1),'+'); %discretized
@@ -95,7 +90,6 @@ function [del , ANS, error] = A_opt_mod(N,t,theta,range,fun)
   hold on
     plot(u(kk),zeros(1,length(kk)),'pg'); %supporting points
     legend('Discretized','d(x,\theta)','Supporting point');
-   % title('Directional derivative plot','FontSize',20);
     xlabel('design space','FontSize', 16); % x-axis label
     ylabel('Directional Derivative','FontSize', 16); % y-axis label
   hold on

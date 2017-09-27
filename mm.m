@@ -5,7 +5,5 @@
 % Theta has dimension 2x1
 
 function ANS = mm(xi,theta)
-  par_a = xi/(theta(2)+xi);     % partial derivative wrt a
-  par_b = -(theta(1)*xi)/(theta(2)+xi).^2; % partial derivative wrt b
-  ANS = [par_a ; par_b];
+  ANS = [xi/(theta(2)+xi);  -(theta(1)*xi)/(theta(2)+xi).^2];
 end

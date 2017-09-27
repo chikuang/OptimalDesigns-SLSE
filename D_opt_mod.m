@@ -25,7 +25,7 @@ function [del , ANS, error] = D_opt_mod(N,t,theta,range,fun)
   u = range(1)+(range(2)-range(1))*((1:N)-1)/(N-1); %discretized equally spaced space
   w = zeros(N,1); n = length(theta); del = 0 ;
   g1 = zeros(n,1); G2 = zeros(n);
-  sqt=sqrt(t);
+  sqt = sqrt(t);
   
   %% cvx part
   cvx_begin quiet
@@ -34,25 +34,12 @@ function [del , ANS, error] = D_opt_mod(N,t,theta,range,fun)
     minimize del(1)
     subject to
 %    constructing the B matrix
-     %for i = 1:N
-     %  f = fun(u(i),theta);
-     %  g1 = g1 + w(i)*f;
-     %  G2 = G2 + w(i)*f*f';
-     %end
-     f = fun(u,theta);
-     g1 = f*w; G2=f'*f*w; 
-% this is the improvement , do it later
-%        for i=1:N
-%          f(i,:)=fun(u(i),theta);
-%        end
-%        for i = 1:n
-%         g1(i) = w'.*f(:,i);
-%         G2(i)= w(i).*f*f';
-%        end
-%        sum(g1);
-       %
-   %   B = [1 sqt*g1' ; sqt*g1 G2];
-      B = [1 sqt*g1' ; sqt*g1' G2];
+     for i = 1:N
+       f = fun(u(i),theta);
+       g1 = g1 + w(i)*f;
+       G2 = G2 + w(i)*f*f';
+     end
+     B = [1 sqt*g1' ; sqt*g1 G2];
 
       % constrains
       -log_det(B) <= del;
@@ -64,12 +51,8 @@ function [del , ANS, error] = D_opt_mod(N,t,theta,range,fun)
   kk = find(w>1e-4); % because the computer does not have exact zero
   ANS = [u(kk);w(kk)']; % return the answer
 
-  %% checking condition, from M-A
   % prepare the variables
-   %A = G2 - t*g1*g1';
-   %inv_A = inv(A);
-   
-   BI = inv(B);
+   %BI = inv(B);
    
    %BI = 1/B;
    phi_D = zeros(N,1);
@@ -77,11 +60,8 @@ function [del , ANS, error] = D_opt_mod(N,t,theta,range,fun)
     f = fun(u(i),theta);
     I = [1 sqt*f' ; sqt*f  f*f'];
     %phi_D(i) = trace( BI*I) ;
-    phi_D(i)=trace(B\I);
-    %fg1 = f - g1;
-    %phi_D(i) = (1-t)*f' * inv_A*f+ t* fg1' *inv_A *fg1 ;
+    phi_D(i) = trace(B\I);
   end
-  %q = n*ones(N,1);
   q = (n+1)*ones(N,1);
   
   % update the error
@@ -89,7 +69,7 @@ function [del , ANS, error] = D_opt_mod(N,t,theta,range,fun)
   
   %% plot
   % first, we increase the graphing domain
-  new_range = [0;0]; add_dist = (range(2)-range(1))/20;
+  new_range = [0;0]; add_dist = (range(2)-range(1)) /20;
   new_range(1) = range(1) - add_dist;
   new_range(2) = range(2) + add_dist;
   
@@ -103,8 +83,6 @@ function [del , ANS, error] = D_opt_mod(N,t,theta,range,fun)
     title('Discretized weight distribution','FontSize', 20)
   
   % directional derivative plot
-%   fx = @(x) fun(x,theta);
-%   ff = @(x) (1-t).*fx(x)'*inv_A*fx(x)+ t.* (fx(x)-g1)'*inv_A *(fx(x)-g1)-n;
   fx = @(x) fun(x,theta);
   ff = @(x) trace(B\[1 sqt.*fx(x)' ; sqt.*fx(x)  fx(x)*fx(x)'] ) - (n+1);
   %ff = @(x) trace(BI* [1 sqrt(t)*fx(x)' ; sqrt(t)*fx(x)  fx(x)*fx(x)'] ) - (n+1);
@@ -113,7 +91,7 @@ function [del , ANS, error] = D_opt_mod(N,t,theta,range,fun)
   figure
     plot(u,phi_D-q,'+'); %discretized
     xlim(new_range);
-    ylim([mini+mini/10,0.5]);
+    ylim([mini+mini/10,1]);
   hold on
     fplot(ff,range','-'); %function
   hold on

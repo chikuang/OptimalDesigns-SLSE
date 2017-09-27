@@ -10,6 +10,6 @@ function ANS =poly_draft(xi,theta)
   n = length(theta); %the order of the polynomial
   ANS = zeros(n,1);
   for i = 1:n
-    ANS(i,1) = xi^i;
+    ANS(i,1) = xi.^i;
   end
 end

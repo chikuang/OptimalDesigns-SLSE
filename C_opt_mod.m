@@ -53,8 +53,6 @@ function [del , ANS, error] = C_opt_mod(N,t,theta,range,fun,c)
   phi_C = zeros(N,1);
   for i = 1:N
     f = fun(u(i),theta);
-%     fg1 = f - g1;
-%     phi_A(i) = (1-t)*f' * inv_A_2*f+ t* fg1' *inv_A_2 *fg1 ;
      I = [1, sqrt(t)*f';sqrt(t)*f, f*f'];
      phi_C(i) = trace(I*BI*C'*C*BI);
   end
@@ -92,7 +90,6 @@ function [del , ANS, error] = C_opt_mod(N,t,theta,range,fun,c)
   hold on
     plot(u(kk),zeros(1,length(kk)),'pg'); %supporting points
     legend('Discretized','d(x,\theta)','Supporting point');
-   % title('Directional derivative plot','FontSize',20);
     xlabel('design space','FontSize', 16); % x-axis label
     ylabel('Directional Derivative','FontSize', 16); % y-axis label
   hold on
