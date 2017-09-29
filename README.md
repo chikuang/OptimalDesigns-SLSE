@@ -15,16 +15,13 @@ Second Order Least Square estimator on
 
    In order to use the program, you need to download CVX program from "http://cvxr.com/cvx/"
 
-MM model
-  - mm.m
+## Models 
 
-MM model with transformation
-  
-  - mm_trans
-
-Compartment model
-
-  - comp_model
+* Michaelis Menton Model (MM)
+* Compartment Model
+* Emax Model
+* Polynomial model
+* ...
 
 
 
