@@ -11,6 +11,10 @@ Second Order Least Square estimator on
 
     3) C-optimal Design Criterion
 
+## Note
+
+   In order to use the program, you need to download CVX program from "http://cvxr.com/cvx/"
+
 MM model
   - mm.m
 
@@ -21,3 +25,6 @@ MM model with transformation
 Compartment model
 
   - comp_model
+
+
+
