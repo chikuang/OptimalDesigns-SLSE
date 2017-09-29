@@ -5,11 +5,9 @@ Supervisor: Julue Zhou
 
 Second Order Least Square estimator on
 
-    1) D-optimal Design Criterion
-
-    2) A-optimal Design Criterion
-
-    3) C-optimal Design Criterion
+1) D-optimal Design Criterion
+2) A-optimal Design Criterion
+3) C-optimal Design Criterion
 
 ## Note
 
