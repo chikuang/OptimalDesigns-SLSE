@@ -7,15 +7,15 @@
 % Compartment model with 2 compartments
 % theta = [ a1 = 1; b1 =0.1 ;a2 =1 ;b2 =1.0] 
 % range is from 0 to 50
-% [d ,a,e] = D_opt(101,0,[1 0.1 1 1]',[0;50],@comp_2)
+% [d ,a,e] = D_opt_mod(101,0,[1 0.1 1 1]',[0;50],@comp_2)
 
 % Michaelis-Menten model
 % theta = [ a=1 , b=1] 
 % range is from 0 to 4
-% [d ,a,e] = D_opt(101,0,[1,1]',[0;4],@mm)
+% [d ,a,e] = D_opt_mod(101,0,[1,1]',[0;4],@mm)
 
 % Compartment model with 4 compartments
-% [d ,a,e] = D_opt(101,0,[1, 0.1,1, 0.6, 1, 2.3, 1, 5.5]',[0;10],@comp_4)
+% [d ,a,e] = D_opt_mod(101,0,[1, 0.1,1, 0.6, 1, 2.3, 1, 5.5]',[0;10],@comp_4)
 
 %% function itself
 function [del , ANS, error] = D_opt_mod(N,t,theta,range,fun)    
