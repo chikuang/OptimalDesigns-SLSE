@@ -3,24 +3,6 @@
 % C optimality criterion
 % Optimal designs for regression models using 2nd order LSE
 
-%% the examples used
-% Compartment model with 2 compartments
-% theta = [ a1 = 1; b1 =0.1 ;a2 =1 ;b2 =1.0] 
-% range is from 0 to 50
-% [d ,a,e] = C_opt_mod(101,0,[1 0.1 1 1]',[0;50],@comp_2,[3,2,4,5])
-
-% Michaelis-Menten model
-% theta = [ a=1 , b=1] 
-% range is from 0 to 4
-% [d ,a,e] = C_opt_mod(101,0,[1 1]',[0;4],@mm,[1/2,1/2])
-
-% Compartment model with 8 compartments
-%[d ,a,e]= C_opt(101,0,[1,0.1,1,0.6,1,2.3,1,5.5]',[0;10],@comp_4)
-
-% polynomial model with degrees n and combination c in row vector
-%[d ,a,e] =C_opt_mod(2001,t,zeros(n,1),[-1;1],@poly_draft,c)
-%e.g. [d ,a,e] =C_opt_mod(2001,0.95,zeros(3,1),[-1;1],@poly_draft,[1/2,1/4,1/8])
-
 %% function itself
 function [del , ANS, error] = C_opt_mod(N,t,theta,range,fun,c)    
   %% initialization
