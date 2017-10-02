@@ -1,17 +1,19 @@
-# Research
+Author: Chi-Kuang Yeh "http://www.math.uvic.ca/~chikuang/"
 
-Author: Chi-Kuang Yeh
-Supervisor: Julue Zhou
+Supervisor: Julue Zhou "http://www.math.uvic.ca/~jzhou/"
 
-Second Order Least Square estimator on
+School: University of Victoria "https://www.uvic.ca/"
+
+# Second Order Least Square estimator on
 
     1) D-optimal Design Criterion
     2) A-optimal Design Criterion
     3) C-optimal Design Criterion
 
-## Note
+## Software used
 
-   In order to use the program, you need to download CVX program from "http://cvxr.com/cvx/"
+* This research is programmed on MATLAB, version 2016a. This can be downloaded from "https://www.mathworks.com/products/matlab.html"
+* In order to use the program, you need to download CVX program from "http://cvxr.com/cvx/"
 
 ## Models 
 
@@ -19,7 +21,5 @@ Second Order Least Square estimator on
 * Compartment Model
 * Emax Model
 * Polynomial model
-* ...
-
-
-
+* Fractional Polynomial model
+* etc. ...
