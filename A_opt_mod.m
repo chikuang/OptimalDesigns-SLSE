@@ -61,6 +61,7 @@ function [del , ANS, error] = A_opt_mod(N,t,theta,range,fun)
   figure % new figure window
     stem( u,w,'kd');
     xlim(new_range);  % increase the domain, so the points wont be on the edge
+    ylim([0,1]);
     xlabel('design space','FontSize', 16) % x-axis label
     ylabel('weight','FontSize', 16) % y-axis label
     title('Discretized weight distribution','FontSize', 20)
@@ -69,16 +70,19 @@ function [del , ANS, error] = A_opt_mod(N,t,theta,range,fun)
   fx = @(x) fun(x,theta);
   ff = @(x) trace([1 sqrt(t)*fx(x)' ; sqrt(t)*fx(x)  fx(x)*fx(x)'] *BI*C'*C*BI) - trac;
   
+  mini = min(phi_A - trac*ones(N,1));
   figure
     plot(u,phi_A-trac*ones(N,1),'+'); %discretized
+    xlim(new_range);
+    ylim([mini+mini/10,1]);
   hold on
-    fplot(ff,[range(1) range(2)],'-'); %function
+    fplot(ff,range','-'); %function
   hold on
     plot(u(kk),zeros(1,length(kk)),'pg'); %supporting points
     legend('Discretized','d(x,\theta)','Supporting point');
     xlabel('design space','FontSize', 16); % x-axis label
     ylabel('Directional Derivative','FontSize', 16); % y-axis label
   hold on
-    line([range(1),range(2)],[0,0],'Color','red');
+    line(new_range,[0,0],'Color','red');
   hold off
 end
