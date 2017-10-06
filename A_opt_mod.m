@@ -83,6 +83,6 @@ function [del , ANS, error] = A_opt_mod(N,t,theta,range,fun)
     xlabel('design space','FontSize', 16); % x-axis label
     ylabel('Directional Derivative','FontSize', 16); % y-axis label
   hold on
-    line(new_range,[0,0],'Color','red');
+    line(new_range,[0,0],'Color','blue','LineStyle','--');
   hold off
 end
