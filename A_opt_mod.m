@@ -72,17 +72,17 @@ function [del , ANS, error] = A_opt_mod(N,t,theta,range,fun)
   
   mini = min(phi_A - trac*ones(N,1));
   figure
-    plot(u,phi_A-trac*ones(N,1),'+'); %discretized
+    h1 = plot(u,phi_A-trac*ones(N,1),'+'); %discretized
     xlim(new_range);
     ylim([mini+mini/10,1]);
   hold on
-    fplot(ff,range','-'); %function
-  hold on
-    plot(u(kk),zeros(1,length(kk)),'pg'); %supporting points
-    legend('Discretized','d(x,\theta)','Supporting point');
-    xlabel('design space','FontSize', 16); % x-axis label
-    ylabel('Directional Derivative','FontSize', 16); % y-axis label
+    h2 = fplot(ff,range','-'); %function
   hold on
     line(new_range,[0,0],'Color','blue','LineStyle','--');
+  hold on
+    h3 = plot(u(kk),zeros(1,length(kk)),'pg'); %supporting points
+    legend([h1 h2 h3], 'Discretized','d(x,\theta)','Supporting point');
+    xlabel('design space','FontSize', 16); % x-axis label
+    ylabel('Directional Derivative','FontSize', 16); % y-axis label
   hold off
 end

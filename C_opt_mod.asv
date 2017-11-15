@@ -66,15 +66,15 @@ function [del , ANS, error] = C_opt_mod(N,t,theta,range,fun,c)
     BI)-term;
   
   figure
-    h1=plot(u,phi_C-term*ones(N,1),'+'); %discretized
+    jplot(u,phi_C-term*ones(N,1),'+'); %discretized
   hold on
-    h2=fplot(ff,[range(1) range(2)],'-'); %function
+    fplot(ff,[range(1) range(2)],'-'); %function
   hold on
-    line([range(1),range(2)],[0,0],'Color','red');
-  hold on
-    h3 = plot(u(kk),zeros(1,length(kk)),'pg'); %supporting points
-    legend([h1 h2 h3], 'Discretized','d(x,\theta)','Supporting point');
+    plot(u(kk),zeros(1,length(kk)),'pg'); %supporting points
+    legend('Discretized','d(x,\theta)','Supporting point');
     xlabel('design space','FontSize', 16); % x-axis label
     ylabel('Directional Derivative','FontSize', 16); % y-axis label
+  hold on
+    line([range(1),range(2)],[0,0],'Color','red');
   hold off
 end
