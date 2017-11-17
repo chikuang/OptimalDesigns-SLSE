@@ -12,8 +12,8 @@ function [del , ANS, error] = A_opt_mod(N,t,theta,range,fun)
   g1 = zeros(n,1) ; G2 = zeros(n) ;  obj_val = 0;
   
   %% cvx part
-  cvx_begin %quiet
-    cvx_precision high
+  cvx_begin quiet
+    cvx_precision best
     variables w(N,1) del(1)%design variable
     minimize del(1)
     subject to
@@ -76,7 +76,12 @@ function [del , ANS, error] = A_opt_mod(N,t,theta,range,fun)
     xlim(new_range);
     ylim([mini+mini/10,1]);
   hold on
-    h2 = fplot(ff,range','-'); %function
+    y = zeros(size(u));
+    for i =  1:length(u)
+      y(i) = ff(u(i));
+    end
+    h2 = plot(u,y,'-'); %function
+    %h2 = fplot(ff,range','-'); %not taking vector, not good
   hold on
     line(new_range,[0,0],'Color','blue','LineStyle','--');
   hold on

@@ -14,16 +14,16 @@ function [del , ANS, error] = D_opt_mod(N,t,theta,range,fun)
   sqt = sqrt(t);
   
   %% cvx part
-  cvx_begin
+  cvx_begin quiet
     cvx_precision high
     variables w(N,1) del(1)%design variable and upper bound
     minimize del(1)
     subject to
 %    constructing the B matrix
+     f = fun(u,theta);
+     g1 = f*w;
      for i = 1:N
-       f = fun(u(i),theta);
-       g1 = g1 + w(i)*f;
-       G2 = G2 + w(i)*f*f';
+       G2 = G2 + w(i)*f(:,i)*f(:,i)';
      end
      B = [1 sqt*g1' ; sqt*g1 G2];
 
@@ -42,9 +42,10 @@ function [del , ANS, error] = D_opt_mod(N,t,theta,range,fun)
    
    %BI = 1/B;
    phi_D = zeros(N,1);
+   f = fun(u,theta);
   for i = 1:N
-    f = fun(u(i),theta);
-    I = [1 sqt*f' ; sqt*f  f*f'];
+    %f = fun(u(i),theta);
+    I = [1 sqt*f(:,i)' ; sqt*f(:,i)  f(:,i)*f(:,i)'];
     %phi_D(i) = trace( BI*I) ;
     phi_D(i) = trace(B\I);
   end
@@ -80,7 +81,7 @@ function [del , ANS, error] = D_opt_mod(N,t,theta,range,fun)
     ylim([mini+mini/10,1]);
   hold on
     y = zeros(size(u));
-    for i =  1:length(u)
+    for i = 1:length(u)
       y(i) = ff(u(i));
     end
     h2 = plot(u,y,'-'); %function
