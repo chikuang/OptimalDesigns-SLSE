@@ -15,7 +15,7 @@ function [del , ANS, error] = D_opt_mod(N,t,theta,range,fun)
   
   %% cvx part
   cvx_begin
-    cvx_precision high
+    cvx_precision best
     variables w(N,1) del(1)%design variable and upper bound
     minimize del(1)
     subject to
