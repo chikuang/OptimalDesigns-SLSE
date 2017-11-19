@@ -4,10 +4,8 @@
 % Purpose: To calculate the gradient of the function in
 %   trignometric model of order n
 function ANS = trig(xi,theta)
-  ANS = zeros(length(theta),1);
-  h = length(theta/2;
-  for i = 1:h
-    ANS(i,1) = cos(i*xi);   % first half is all cos
-    ANS(i+h,1) = sin(i*xi); % second half is all sin
-  end
+  n =length(theta);
+  ANS = zeros(n,1);
+  ANS(1:n/2,1)  = applyfun(@(i) cos(i*xi),1:n/2);
+  ANS(n/2+1:n,1)    = applyfun(@(i) sin(i*xi(i)),[n/2:n]);
 end
