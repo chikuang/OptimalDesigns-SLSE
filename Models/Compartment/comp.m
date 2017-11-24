@@ -5,7 +5,7 @@
 %   Compartmental model with n/2 compartments
 % Theta has dimension nx1
 
-% [d ,a,e] = D_opt(101,0.3,[1, 0.1,1, 0.6, 1, 2.3, 1, 5.5]',[0;1],@comp_draft)
+% [d ,a,e] = D_opt(101,0.3,[1, 0.1,1, 0.6, 1, 2.3, 1, 5.5]',[0;1],@comp)
 function ANS =comp(xi,theta)
   ANS = zeros(length(theta),1);
   n = length(theta);
