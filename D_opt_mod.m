@@ -9,7 +9,7 @@ function [del , ANS, error] = D_opt_mod(N,t,theta,range,fun)
   
   % these ones are used in solving the question
   u = range(1)+(range(2)-range(1))*((1:N)-1)/(N-1); %discretized equally spaced space
-  w = zeros(N,1); n = length(theta); del = 0 ;
+  w = zeros(N,1); n = length(theta); del = 0 ; one_vec = ones(N,1);
   g1 = zeros(n,1); G2 = zeros(n);
   sqt = sqrt(t);
   
@@ -30,7 +30,7 @@ function [del , ANS, error] = D_opt_mod(N,t,theta,range,fun)
       % constrains
       -log_det(B) <= del;
       -w <= zeros(length(w),1);
-      sum(w) == 1;
+      one_vec' * w == 1;
   cvx_end
   
   %% propose the outputs
