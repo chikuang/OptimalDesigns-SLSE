@@ -8,7 +8,7 @@ function [del , ANS, error] = C_opt_mod(N,t,theta,range,fun,c)
   %% initialization
   u = range(1) + (range(2)-range(1))*((1:N)-1)/(N-1); %discretized equally spaced space
   w = zeros(N,1); del = 0; n = length(theta);
-  g1 = zeros(n,1);G2 = zeros(n); C=[0,c]; one_vec = ones(N,1);
+  g1 = zeros(n,1);G2 = zeros(n); C=[0,c]; one_vec = ones(N,1);zero_vec = zeros(N,1);
   %C is only used in C-optimality, for paramter combination
  
   %% cvx part
@@ -26,8 +26,9 @@ function [del , ANS, error] = C_opt_mod(N,t,theta,range,fun,c)
       B = [1, sqrt(t)*g1';sqrt(t)*g1, G2];
       % the three constrains
       matrix_frac(C',B) <= del;
-      -w <= zeros(length(w),1);
-      one_vec' * w == 1;;
+      %-w <= zeros(length(w),1);
+      -w <= zero_vec;
+      one_vec' * w == 1;
   cvx_end
   
   %% checking condition

@@ -9,7 +9,7 @@ function [del , ANS, error] = A_opt_mod(N,t,theta,range,fun)
   u = range(1) + (range(2)-range(1))*((1:N)-1)/(N-1); %discretized equally spaced space
   w = zeros(N,1); n = length(theta); del = 0;
   C = [zeros(n,1) eye(n)]'; % each column is a ci which we used later
-  g1 = zeros(n,1) ; G2 = zeros(n) ;  obj_val = 0; one_vec = ones(N,1);
+  g1 = zeros(n,1) ; G2 = zeros(n) ;  obj_val = 0; one_vec = ones(N,1);zero_vec = zeros(N,1);
   
   %% cvx part
   cvx_begin
@@ -29,7 +29,8 @@ function [del , ANS, error] = A_opt_mod(N,t,theta,range,fun)
       end
       % the three constrains
       obj_val <= del;
-      -w <= zeros(length(w),1);
+      %-w <= zeros(length(w),1);
+      -w <= zero_vec;
       one_vec' * w == 1;
   cvx_end
   
