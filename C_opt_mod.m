@@ -12,8 +12,8 @@ function [del , ANS, error] = C_opt_mod(N,t,theta,range,fun,c)
   %C is only used in C-optimality, for paramter combination
  
   %% cvx part
-  cvx_begin quiet
-    cvx_precision high
+  cvx_begin
+    cvx_precision best
     variables w(N,1) del(1)%design variable and upper bound
     minimize del(1)
     subject to
