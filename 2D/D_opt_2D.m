@@ -23,10 +23,12 @@ function [del , ANS, error] = D_opt_2D(N1,N2,t,theta,range1,range2,fun)
     minimize del(1)
     subject to
 %    constructing the B matrix
-     for i = 1:N
-       f = fun(u(i),theta); %probably modify here, add v(i) in
-       g1 = g1 + w(i)*f;
-       G2 = G2 + w(i)*f*f';
+     for i = 1:N1
+       for j =1:N2
+         f = fun(u(i),v(j),theta); %probably modify here, add v(i) in
+         g1 = g1 + w(i)*f;
+         G2 = G2 + w(i)*f*f';
+       end
      end
      B = [1 sqt*g1' ; sqt*g1 G2];
 
@@ -40,3 +42,18 @@ function [del , ANS, error] = D_opt_2D(N1,N2,t,theta,range1,range2,fun)
   %% propose the outputs
   kk = find(w>1e-4); % because the computer does not have exact zero
   ANS = [u(kk);w(kk)']; % return the answer
+  
+   phi_D = zeros(N,1);
+  for i = 1:N1
+    for j=1:N2
+      f = fun(u(i),v(j),theta);
+      I = [1 sqt*f' ; sqt*f  f*f'];
+      %phi_D(i) = trace( BI*I) ;
+      phi_D(i) = trace(B\I);
+    end
+  end
+  q = (n+1)*ones(N,1);
+  
+  % update the error
+  error = max(phi_D - q) ;
+end
