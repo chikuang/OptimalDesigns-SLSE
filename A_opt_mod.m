@@ -12,7 +12,7 @@ function [del , ANS, error] = A_opt_mod(N,t,theta,range,fun)
   g1 = zeros(n,1) ; G2 = zeros(n) ;  obj_val = 0; one_vec = ones(N,1);zero_vec = zeros(N,1);
   
   %% cvx part
-  cvx_begin
+  cvx_begin quiet
     cvx_precision best
     variables w(N,1) del(1)%design variable
     minimize del(1)
