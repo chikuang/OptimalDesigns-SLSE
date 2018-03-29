@@ -13,22 +13,22 @@ figure
   xlabel({'level of asymmetry','(t)'},'FontSize', 16); % x-axis label
   ylabel({'complexity', '(in seconds)'},'FontSize', 16); % y-axis label
   xlim([0, 1]);
-  ylim([0, max(D1001)*1.1]);
+  ylim([0, max(D1001)*1.3]);
 figure
   h2 = plot(t,D5001,'o-','linewidth',5,'markersize',14,'markerfacecolor','Red');
   xlabel({'level of asymmetry','(t)'},'FontSize', 16); % x-axis label
   ylabel({'complexity', '(in seconds)'},'FontSize', 16); % y-axis label
   xlim([0, 1]);
-  ylim([0, max(D5001)*1.1]);
+  ylim([0, max(D5001)*1.3]);
 figure
   h3 = plot(t,A1001,'o-','linewidth',5,'markersize',14,'markerfacecolor','Red');
   xlabel({'level of asymmetry','(t)'},'FontSize', 16); % x-axis label
   ylabel({'complexity', '(in seconds)'},'FontSize', 16); % y-axis label
   xlim([0, 1]);
-  ylim([0, max(A1001)*1.1]);
+  ylim([0, max(A1001)*1.3]);
 figure
   h4 = plot(t,A5001,'o-','linewidth',5,'markersize',14,'markerfacecolor','Red');
   xlabel({'level of asymmetry','(t)'},'FontSize', 16); % x-axis label
   ylabel({'complexity', '(in seconds)'},'FontSize', 16); % y-axis label
   xlim([0, 1]);
-  ylim([0, max(A5001)*1.1]);
+  ylim([0, max(A5001)*1.3]);
