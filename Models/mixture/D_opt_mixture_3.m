@@ -4,7 +4,7 @@
 % Optimal designs for regression models using 2nd order LSE
 
 %% function itself
-function [del , ANS, error,pt] = D_opt_mixture(N1,N2,N3,t,theta,range,fun)    
+function [del , ANS, error,pt] = D_opt_mixture_3(N1,N2,N3,t,theta,range,fun)    
   %% initialization
   
   counter = 0;
