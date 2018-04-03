@@ -1,34 +1,34 @@
 t = [0 0.3 0.5 0.7 0.9]';
 %A opt with N =1001
-A1001 = [2.762953 2.770345 2.779268 2.683086 2.645688]';
+A1001 = [2.870341 2.947939  2.832736  2.842263  2.853800]';
 %A opt with N =5001
-A5001 = [14.339726 13.588190 14.018942  13.511677 13.508004]';
+A5001 = [13.268557 13.599972 13.629027 13.413515 13.677847]'; 
 %D opt with N =1001
-D1001 = [4.189248 4.136878 4.127095 4.276539 4.125098]';
+D1001 = [4.513202 4.487485  4.592582 4.597348 4.663097]';
 
 %D opt with N =5001
-D5001 = [15.256286 15.633771 15.509519 15.596103 15.864564]';
+D5001 = [16.188163 16.217196 16.218664 15.991854 16.239503]';
 figure
   h1 = plot(t,D1001,'o-','linewidth',5,'markersize',14,'markerfacecolor','Red');
   xlabel({'level of asymmetry','(t)'},'FontSize', 16); % x-axis label
   ylabel({'complexity', '(in seconds)'},'FontSize', 16); % y-axis label
   xlim([0, 1]);
-  ylim([0, max(D1001)*1.3]);
+  ylim([0, max(D1001)*1.5]);
 figure
   h2 = plot(t,D5001,'o-','linewidth',5,'markersize',14,'markerfacecolor','Red');
   xlabel({'level of asymmetry','(t)'},'FontSize', 16); % x-axis label
   ylabel({'complexity', '(in seconds)'},'FontSize', 16); % y-axis label
   xlim([0, 1]);
-  ylim([0, max(D5001)*1.3]);
+  ylim([0, max(D5001)*1.5]);
 figure
   h3 = plot(t,A1001,'o-','linewidth',5,'markersize',14,'markerfacecolor','Red');
   xlabel({'level of asymmetry','(t)'},'FontSize', 16); % x-axis label
   ylabel({'complexity', '(in seconds)'},'FontSize', 16); % y-axis label
   xlim([0, 1]);
-  ylim([0, max(A1001)*1.3]);
+  ylim([0, max(A1001)*1.5]);
 figure
   h4 = plot(t,A5001,'o-','linewidth',5,'markersize',14,'markerfacecolor','Red');
   xlabel({'level of asymmetry','(t)'},'FontSize', 16); % x-axis label
   ylabel({'complexity', '(in seconds)'},'FontSize', 16); % y-axis label
   xlim([0, 1]);
-  ylim([0, max(A5001)*1.3]);
+  ylim([0, max(A5001)*1.5]);
