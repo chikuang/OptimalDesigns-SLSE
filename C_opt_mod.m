@@ -4,7 +4,7 @@
 % Optimal designs for regression models using 2nd order LSE
 
 %% function itself
-function [del , ANS, error] = C_opt_mod(N,t,theta,range,fun,c)    
+function [del , ANS, error] = c_opt_mod(N,t,theta,range,fun,c)    
   %% initialization
   u = range(1) + (range(2)-range(1))*((1:N)-1)/(N-1); %discretized equally spaced space
   w = zeros(N,1); del = 0; n = length(theta);
