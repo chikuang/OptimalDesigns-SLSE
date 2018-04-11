@@ -19,7 +19,7 @@ function [del , ANS, error] = A_opt(N,t,theta,range,fun)
         g1 = g1 + w(i)*f;
         G2 = G2 + w(i)*f*f';
       end
-      B = [1,sqrt*g1';sqt*g1,G2];
+      B = [1,sqt*g1';sqt*g1,G2];
       % constaints
       for k = 1:n
         obj_val = obj_val + matrix_frac(C(:,k),B) ;
@@ -38,7 +38,7 @@ function [del , ANS, error] = A_opt(N,t,theta,range,fun)
   BI = inv(B);
   phi_A = zeros(N,1);
   C = blkdiag( 0,eye(n));
-  for i = 1:
+  for i = 1:N
     f = fun(u(i),theta);
      I = [1 sqt*f' ; sqt*f  f*f'];
      phi_A(i) = trace(I*BI*C' *C*BI) ;

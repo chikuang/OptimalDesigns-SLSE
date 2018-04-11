@@ -2,7 +2,7 @@ function [del , ANS, error] = c_opt(N,t,theta,range,fun,c)
   %% initialization
   u = range(1) + (range(2)-range(1))*((1:N)-1)/(N-1); %discretized equally spaced space
   w = zeros(N,1); del = 0; n = length(theta);
-  g1 = zeros(n,1);G2 = zeros(n); C=[0,c]; 
+  g1 = zeros(n,1);G2 = zeros(n); C=[0,c']'; 
   one_vec = ones(N,1);zero_vec = zeros(N,1);
   sqt = sqrt(t);
   %% cvx part
@@ -19,7 +19,7 @@ function [del , ANS, error] = c_opt(N,t,theta,range,fun,c)
       end
       B = [1, sqt*g1';sqt*g1, G2];
       % the three constrains
-      matrix_frac(C',B) <= del;
+      matrix_frac(C,B) <= del;
       -w <= zero_vec;
       one_vec' * w == 1;
   cvx_end
@@ -30,10 +30,10 @@ function [del , ANS, error] = c_opt(N,t,theta,range,fun,c)
   for i = 1:N
     f = fun(u(i),theta);
      I = [1, sqt*f';sqt*f, f*f'];
-     phi_C(i) = trace(I*BI*C'*C*BI);
+     phi_C(i) = trace(I*BI*C*C'*BI);
   end
 
-  term = C*BI*C';
+  term = C'*BI*C;
   error = max(phi_C - term );
   
   %% manage the outputs
@@ -55,7 +55,7 @@ function [del , ANS, error] = c_opt(N,t,theta,range,fun,c)
  
   % directional derivative plot
   fx = @(x) fun(x,theta);
-  ff = @(x) trace([1 sqt*fx(x)' ; sqt*fx(x)  fx(x)*fx(x)'] *BI*C'*C*...
+  ff = @(x) trace([1 sqt*fx(x)' ; sqt*fx(x)  fx(x)*fx(x)'] *BI*C*C'*...
     BI)-term;
   
   figure
