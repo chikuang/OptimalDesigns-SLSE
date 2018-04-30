@@ -8,7 +8,7 @@ function [del , ANS, error] = D_opt(N,t,theta,range,fun)
   sqt = sqrt(t);
   
   %% cvx part
-  cvx_begin
+  cvx_begin quiet
     cvx_precision best
     variables w(N,1) del(1)
     minimize del(1)
@@ -50,19 +50,20 @@ function [del , ANS, error] = D_opt(N,t,theta,range,fun)
   % first plot, plot out the design points
   figure
     stem( u,w,'kd');
-    xlim(new_range); 
+    xlim(new_range);  % increase the domain, so the points wont be on the edge
     ylim([0,1]);
     xlabel('design space','FontSize', 16) % x-axis label
     ylabel('weights','FontSize', 16) % y-axis label
     title('Discretized weight distribution','FontSize', 20)
   
-  % directional derivative plot
+ % directional derivative plot
   fx = @(x) fun(x,theta);
   ff = @(x) trace(B\[1 sqt.*fx(x)' ; sqt.*fx(x)  fx(x)*fx(x)'] ) - (n+1);
+  %ff = @(x) trace(BI* [1 sqrt(t)*fx(x)' ; sqrt(t)*fx(x)  fx(x)*fx(x)'] ) - (n+1);
   
   mini = min(phi_D-q);
   figure
-    h1 = plot(u,phi_D-q,'+'); 
+    h1 = plot(u,phi_D-q,'+'); %discretized
     xlim(new_range);
     ylim([mini+mini/10,1]);
   hold on
@@ -70,13 +71,13 @@ function [del , ANS, error] = D_opt(N,t,theta,range,fun)
     for i =  1:length(u)
       y(i) = ff(u(i));
     end
-    h2 = plot(u,y,'-'); 
+    h2 = plot(u,y,'-'); %function
   hold on
     line(new_range,[0,0],'Color','blue','LineStyle','--');
   hold on
-    h3 = plot(u(kk),zeros(1,length(kk)),'pg'); 
+    h3 = plot(u(kk),zeros(1,length(kk)),'pg'); %supporting points
     legend([h1 h2 h3], 'Discretized','d(x,\theta)','Supporting point');
-    xlabel('design space','FontSize', 16) 
-    ylabel('Directional Derivative','FontSize', 16) 
+    xlabel('design space','FontSize', 16) % x-axis label
+    ylabel('Directional Derivative','FontSize', 16) % y-axis label
   hold off
 end
