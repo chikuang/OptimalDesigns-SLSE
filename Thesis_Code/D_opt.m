@@ -8,7 +8,7 @@ function [del , ANS, error] = D_opt(N,t,theta,range,fun)
   sqt = sqrt(t);
   
   %% cvx part
-  cvx_begin quiet
+  cvx_begin
     cvx_precision best
     variables w(N,1) del(1)
     minimize del(1)
