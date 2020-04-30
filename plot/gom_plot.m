@@ -1,14 +1,14 @@
-x = 0:0.001:5;
-f = @(x) exp(-2*exp(-3*x)); 
+x = 0:0.001:10;
+f = @(x) exp(-exp(-x)); 
 y = f(x);
 figure
   h1 = plot(x,y);
-  xlabel('design space ( S=[0,5] )','FontSize', 16); % x-axis label
+  xlabel('design space ( S=[0,10] )','FontSize', 16); % x-axis label
   ylabel('g(x;\theta)','FontSize', 16); % y-axis label
-  xlim([-0.05,5.5]);
+  xlim([-0.5,10.5]);
   ylim([-0.05,1.5]);
 hold on
-  x1 = [0.0645;0.5790;5.0000];
+  x1 = [0.000;1.350;10.0000];
   y1 = [0;0;0];
   h2 = plot(x1,y1,'*','Color','Red');
   lgd = legend([h1 h2], 'g(x;\theta)','Support points');

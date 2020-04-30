@@ -9,5 +9,5 @@ y =  [1.922385 2.925531  3.935194  6.000104 8.367561 11.133859 13.606407...
 
 figure
   h1 = plot(x,y,'o-','linewidth',5,'markersize',14,'markerfacecolor','Red');
-  xlabel({'Space partition','(N)'},'FontSize', 16); % x-axis label
+  xlabel({'Number of design points','(N)'},'FontSize', 16); % x-axis label
   ylabel({'Computation time', '(in seconds)'},'FontSize', 16); % y-axis label
