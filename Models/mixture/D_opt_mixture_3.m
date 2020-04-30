@@ -32,7 +32,7 @@ function [del , ANS, error,pt] = D_opt_mixture_3(N1,N2,N3,t,theta,range,fun)
 %    constructing the B matrix
      for i = 1:length(x)
        %f = fun(x,theta);
-       f = fun(x(i,:),theta);%[x(i,1);x(i,2);x(i,3);x(i,1)^2;x(i,2)^2;x(i,3)^2;x(i,1)*x(i,2);x(i,1)*x(i,3)];
+       f = fun(x(i,:),theta);
        g1 = g1 + w(i)*f;
        G2 = G2 + w(i)*f*f';
      end

@@ -1,3 +1,8 @@
+%% Author: Chi-Kuang Yeh
+% Sep 11 / 2017
+% C optimality criterion
+% Optimal designs for regression models using 2nd order LSE
+
 %% function itself
 function [del , ANS, error,pt] = c_opt_mixture_3(N1,N2,N3,t,theta,range,fun,c)    
   %% initialization
