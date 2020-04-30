@@ -1,0 +1,1 @@
+Optimal designs under SLSE can be solved by moment algorithm from [D-optimal designs based on the second-order least squares estimator (2017)](https://link.springer.com/article/10.1007/s00362-015-0688-9) by Lucy Gao and Julie Zhou.

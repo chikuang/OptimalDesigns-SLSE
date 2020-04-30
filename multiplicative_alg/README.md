@@ -1,0 +1,1 @@
+Another useful algorithm for solving optimal design problems is to use the Multiplicative algorithm, proposed by [Bose and Mukerjee (2015)](https://www.sciencedirect.com/science/article/abs/pii/S0378375814001785).
