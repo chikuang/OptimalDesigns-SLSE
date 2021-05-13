@@ -1,6 +1,0 @@
-function ANS = gompertz(xi,theta)
-  po = exp(-theta(2)*exp(-theta(3)*xi)-theta(3)*xi);
-  ANS = [exp(-theta(2)*exp(-theta(3)*xi));...
-    -theta(1)*po;...
-    theta(1)*theta(2)*xi*po];
-end
