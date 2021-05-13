@@ -4,9 +4,9 @@
 % Optimal designs for regression models using 2nd order LSE
 
 %% function itself
-function [del , ANS, error] = c_opt_mod(N,t,theta,range,fun,c)    
+function [del, ANS, error] = c_opt_mod(N, t, theta, range, fun, c)    
   %% initialization
-  u = range(1) + (range(2)-range(1))*((1:N)-1)/(N-1); %discretized equally spaced space
+  u = linespace(range(1), range(2), N); %discretized equally spaced space
   w = zeros(N,1); del = 0; n = length(theta);
   g1 = zeros(n,1);G2 = zeros(n); C=[0,c]; one_vec = ones(N,1);zero_vec = zeros(N,1);
   %C is only used in C-optimality, for paramter combination

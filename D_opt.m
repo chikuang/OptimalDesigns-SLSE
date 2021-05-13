@@ -18,11 +18,11 @@
 % [d ,a,e] = D_opt(101,0,[1, 0.1,1, 0.6, 1, 2.3, 1, 5.5]',[0;10],@comp_4)
 
 %% function itself
-function [del , ANS, error] = D_opt(N,t,theta,range,fun)    
+function [del, ANS, error] = D_opt(N, t, theta, range, fun)    
   %% initialization
   
   % these ones are used in solving the question
-  u = range(1)+(range(2)-range(1))*((1:N)-1)/(N-1); %discretized equally spaced space
+  u = linespace(range(1), range(2), N); %discretized equally spaced space
   w = zeros(N,1); n = length(theta); del = 0 ;
   g1 = zeros(n,1); G2 = zeros(n);
   
@@ -34,9 +34,9 @@ function [del , ANS, error] = D_opt(N,t,theta,range,fun)
     subject to
 %    constructing the B matrix
       for i = 1:N
-        f = fun(u(i),theta);
-        g1 = g1 + w(i)*f;
-        G2 = G2 + w(i)*f*f';
+        f = fun(u(i), theta);
+        g1 = g1 + w(i) * f;
+        G2 = G2 + w(i) * f * f';
       end
 % this is the improvement , do it later
 %       for i=1:N
@@ -44,26 +44,26 @@ function [del , ANS, error] = D_opt(N,t,theta,range,fun)
 %       end
 %       g1 = sum(w*f);
 %       G2=sum(w*f*f');
-      B = [1 sqrt(t)*g1' ; sqrt(t)*g1 G2];
+      B = [1, sqrt(t) * g1' ; sqrt(t) * g1, G2];
       % constrains
       -log_det(B) <= del;
-      -w <= zeros(length(w),1);
+      -w <= zeros(length(w), 1);
       sum(w) == 1;
   cvx_end
   
   %% propose the outputs
   kk = find(w>1e-4); % because the computer does not have exact zero
-  ANS = [u(kk);w(kk)']; % return the answer
+  ANS = [u(kk); w(kk)']; % return the answer
 
   %% checking condition, from M-A
   % prepare the variables
-   A = G2 - t*g1*g1';
+   A = G2 - t * g1 * g1';
    inv_A = inv(A);
-   phi_D = zeros(N,1);
+   phi_D = zeros(N, 1);
   for i = 1:N
-    f = fun(u(i),theta);
+    f = fun(u(i), theta);
     fg1 = f - g1;
-    phi_D(i) = (1-t)*f' * inv_A*f+ t* fg1' *inv_A *fg1 ;
+    phi_D(i) = (1-t) * f' * inv_A * f + t * fg1' * inv_A * fg1 ;
   end
   q = n*ones(N,1);
   

@@ -7,7 +7,7 @@
 function [del , ANS, error] = D_opt_mod(N,t,theta,range,fun)    
   %% initialization
   
-  u = range(1)+(range(2)-range(1))*((1:N)-1)/(N-1); %discretized equally spaced space
+  u = linespace(range(1), range(2), N); %discretized equally spaced space
   w = zeros(N,1); n = length(theta); del = 0 ; one_vec = ones(N,1);zero_vec = zeros(N,1);
   g1 = zeros(n,1); G2 = zeros(n);
   sqt = sqrt(t);
