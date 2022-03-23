@@ -1,19 +1,17 @@
 %% Author: Chi-Kuang Yeh
 % July 25 / 2017
-% D optimality criterion
+% D-optimality criterion
 % Optimal designs for regression models using 2nd order LSE
 
-% [f,m]= Moment_Lucy_D_3(0,[-1,+1],3)
+% [f, m]= D_moment_3(0, 3)
 %% function itself
-function [del, mu] = Moment_Lucy_D_3(t, range, ord)
-  %% initialization
+function [del, mu] = D_moment_3(t, ord)
 
-  b = range(1); c = range(2);
-  mu = zeros(2 * ord, 1);
+  mu = zeros(2 * ord, 1)';
   %% cvx part
   cvx_begin quiet
   cvx_precision high
-  variables mu(2 * ord, 1) del(1) %design variable and upper bound
+  variables mu(2*ord, 1) del(1) %design variable and upper bound
   minimize del(1)
   subject to
   % Constraint 1

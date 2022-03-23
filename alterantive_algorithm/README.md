@@ -1,0 +1,3 @@
+*  Multiplicative algorithm, proposed by [Bose and Mukerjee (2015)](https://www.sciencedirect.com/science/article/abs/pii/S0378375814001785). The example is given as example 2 in Yin and Zhou (2017) [Optimal designs for regression models using the second-order least squares estimator](http://www3.stat.sinica.edu.tw/statistica/J27N4/J27N424/J27N424.html)
+
+* Moment algorithm from [D-optimal designs based on the second-order least squares estimator (2017)](https://link.springer.com/article/10.1007/s00362-015-0688-9) by Lucy Gao and Julie Zhou (2017).
